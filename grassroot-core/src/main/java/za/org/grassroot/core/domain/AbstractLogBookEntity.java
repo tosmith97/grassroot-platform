@@ -1,5 +1,6 @@
 package za.org.grassroot.core.domain;
 
+import org.hibernate.search.annotations.Field;
 import za.org.grassroot.core.util.DateTimeUtil;
 import za.org.grassroot.core.util.UIDGenerator;
 
@@ -48,6 +49,7 @@ public abstract class AbstractLogBookEntity {
 	protected Instant actionByDate;
 
 	@Column(name = "message")
+	@Field
 	protected String message;
 
 	/*

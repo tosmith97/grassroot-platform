@@ -1,5 +1,6 @@
 package za.org.grassroot.core.domain;
 
+import org.hibernate.search.annotations.Indexed;
 import za.org.grassroot.core.util.UIDGenerator;
 
 import javax.persistence.*;
@@ -17,6 +18,7 @@ import java.util.Set;
                 @Index(name = "idx_log_book_group_id", columnList = "parent_group_id"),
                 @Index(name = "idx_log_book_retries_left", columnList = "number_of_reminders_left_to_send"),
                 @Index(name = "idx_log_book_replicated_group_id", columnList = "replicated_group_id")})
+@Indexed
 public class LogBook extends AbstractLogBookEntity implements Task<LogBookContainer>, VoteContainer, MeetingContainer {
     public static final double COMPLETION_PERCENTAGE_BOUNDARY = 50;
 

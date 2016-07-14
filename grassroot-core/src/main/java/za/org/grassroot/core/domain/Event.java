@@ -7,6 +7,7 @@ package za.org.grassroot.core.domain;
  */
 
 
+import org.hibernate.search.annotations.Indexed;
 import za.org.grassroot.core.enums.EventType;
 
 import javax.persistence.*;

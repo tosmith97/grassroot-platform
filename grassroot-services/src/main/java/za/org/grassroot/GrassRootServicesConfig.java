@@ -1,5 +1,7 @@
 package za.org.grassroot;
 
+import org.hibernate.search.jpa.FullTextEntityManager;
+import org.hibernate.search.jpa.Search;
 import org.quartz.CronTrigger;
 import org.quartz.JobDetail;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -8,6 +10,7 @@ import org.springframework.boot.orm.jpa.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
@@ -23,6 +26,7 @@ import za.org.grassroot.scheduling.ApplicationContextAwareQuartzJobBean;
 import za.org.grassroot.scheduling.BatchedNotificationSenderJob;
 import za.org.grassroot.scheduling.UnreadNotificationSenderJob;
 
+import javax.persistence.EntityManager;
 import java.util.Properties;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -113,4 +117,9 @@ public class GrassRootServicesConfig implements SchedulingConfigurer {
 		return factory;
 	}
 
+	@Bean
+	@Primary // since FullTextEntityManager extends EntitiyManager, autowiring sees 2 candidates
+	public FullTextEntityManager fullTextEntityManager(EntityManager entityManager) {
+		return Search.getFullTextEntityManager(entityManager);
+	}
 }

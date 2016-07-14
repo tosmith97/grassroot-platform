@@ -1,5 +1,6 @@
 package za.org.grassroot.core.domain;
 
+import org.hibernate.search.annotations.Field;
 import za.org.grassroot.core.util.DateTimeUtil;
 import za.org.grassroot.core.util.UIDGenerator;
 
@@ -25,16 +26,18 @@ public abstract class AbstractEventEntity {
 	protected Instant createdDateTime;
 
 	@Column(name = "name", length = 40)
+	@Field
 	protected String name;
 
 	@Column(name = "description", length = 512)
+	@Field
 	protected String description;
 
 	/*
 	For meetings this the meeting start time
 	For voting this the vote expire time
 	 */
-	@Column(name = "start_date_time", nullable = false)
+	@Column(name = "start_date_time") // this is not-null in Event, but nullable in EventRequest
 	protected Instant eventStartDateTime;
 
 	@ManyToOne

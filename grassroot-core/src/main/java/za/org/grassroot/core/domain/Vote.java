@@ -1,5 +1,6 @@
 package za.org.grassroot.core.domain;
 
+import org.hibernate.search.annotations.Indexed;
 import za.org.grassroot.core.enums.EventType;
 
 import javax.persistence.DiscriminatorValue;
@@ -10,6 +11,7 @@ import java.time.Instant;
 
 @Entity
 @DiscriminatorValue("VOTE")
+@Indexed
 public class Vote extends Event<VoteContainer> {
 
 	@ManyToOne

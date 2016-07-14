@@ -1,5 +1,6 @@
 package za.org.grassroot.core.domain;
 
+import org.hibernate.search.annotations.Indexed;
 import za.org.grassroot.core.enums.EventType;
 import za.org.grassroot.core.util.UIDGenerator;
 
@@ -9,6 +10,7 @@ import java.util.Objects;
 
 @Entity
 @DiscriminatorValue("MEETING")
+@Indexed
 public class Meeting extends Event<MeetingContainer> implements VoteContainer {
 
 	@Column(name = "location", length = 50)
