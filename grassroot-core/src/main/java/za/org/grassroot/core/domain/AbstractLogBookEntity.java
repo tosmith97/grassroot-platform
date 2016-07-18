@@ -14,6 +14,8 @@ import java.util.Objects;
  */
 @MappedSuperclass
 public abstract class AbstractLogBookEntity {
+	public static final String LUCENE_FIELD_MESSAGE = "message";
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", nullable = false)
@@ -49,7 +51,7 @@ public abstract class AbstractLogBookEntity {
 	protected Instant actionByDate;
 
 	@Column(name = "message")
-	@Field
+	@Field(name = LUCENE_FIELD_MESSAGE)
 	protected String message;
 
 	/*

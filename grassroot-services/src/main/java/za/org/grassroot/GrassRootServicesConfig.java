@@ -116,10 +116,4 @@ public class GrassRootServicesConfig implements SchedulingConfigurer {
 
 		return factory;
 	}
-
-	@Bean
-	@Primary // since FullTextEntityManager extends EntitiyManager, autowiring sees 2 candidates
-	public FullTextEntityManager fullTextEntityManager(EntityManager entityManager) {
-		return Search.getFullTextEntityManager(entityManager);
-	}
 }

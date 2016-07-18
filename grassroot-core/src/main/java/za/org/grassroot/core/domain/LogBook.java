@@ -1,5 +1,7 @@
 package za.org.grassroot.core.domain;
 
+import org.hibernate.search.annotations.FullTextFilterDef;
+import org.hibernate.search.annotations.FullTextFilterDefs;
 import org.hibernate.search.annotations.Indexed;
 import za.org.grassroot.core.util.UIDGenerator;
 
@@ -19,6 +21,9 @@ import java.util.Set;
                 @Index(name = "idx_log_book_retries_left", columnList = "number_of_reminders_left_to_send"),
                 @Index(name = "idx_log_book_replicated_group_id", columnList = "replicated_group_id")})
 @Indexed
+@FullTextFilterDefs( {
+    @FullTextFilterDef(name = "idsFilter", impl = IdsFilterFactory.class)
+})
 public class LogBook extends AbstractLogBookEntity implements Task<LogBookContainer>, VoteContainer, MeetingContainer {
     public static final double COMPLETION_PERCENTAGE_BOUNDARY = 50;
 
